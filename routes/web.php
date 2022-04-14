@@ -21,14 +21,14 @@ Route::get('/', function () {
 
 Route::get('/insert', function(){
 
-    DB::insert('insert into posts(title, content) values(?, ?)', ['PHP with Laravel', 'Laravel is awesome']);
+    DB::insert('insert into posts(title, content, user_id) values(?, ?, ?)', ['PHP with Laravel', 'Laravel is awesome', '1']);
 });
 
 Route::get('/read', function(){
     $posts = Post::all();
 
     foreach($posts as $post) {
-        return $post->content;
+        echo $post->content . "<br>";
     }
 });
 
@@ -37,11 +37,12 @@ Route::get('/basicInsert', function(){
 
     $post->title = "New Eloquent title insert";
     $post->content = "Wow eloquent is really cool, look at this content";
+    $post->user_id = "1";
     $post->save();
 });
 
 Route::get('/create', function(){
-    Post::create(['title'=>'the create method', 'content'=>'I\'m learning alot']);
+    Post::create(['user_id'=>'1', 'title'=>'the create method', 'content'=>'I\'m learning alot']);
 });
 
 Route::get('/update', function(){
@@ -49,7 +50,7 @@ Route::get('/update', function(){
 });
 
 Route::get('/delete', function(){
-    $post = Post::find(2);
+    $post = Post::find(1);
     $post->delete();
 });
 
