@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Country;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -84,6 +86,7 @@ Route::get('/user/{id}/posts', function($id){
 });
 
 Route::get('/user/{id}/role', function($id){
+
     $user = User::find($id)->roles()->orderBy('id', 'asc')->get();
 
     return $user;
@@ -110,4 +113,24 @@ Route::get('user/pivot', function(){
 
 Route::get('/user/country', function(){
 
+    $country = Country::find(1);
+
+    foreach($country->posts as $post){
+        return $post->title;
+    }
+
+});
+
+Route::get('user/photos', function(){
+    $user = Post::find(1);
+
+    foreach($user->photos as $photo){
+        echo $photo->path . '<br>';
+    }
+});
+
+Route::get('photo/{id}/association', function($id) {
+    $photo = Photo::findOrFail($id);
+
+    return $photo->imageable;
 });
