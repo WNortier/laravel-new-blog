@@ -5,6 +5,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Country;
+use App\Models\Photo;
 
 /*
 |--------------------------------------------------------------------------
@@ -129,8 +130,7 @@ Route::get('user/photos', function(){
     }
 });
 
-Route::get('photo/{id}/association', function($id) {
+Route::get('/photo/{id}/association', function($id) {
     $photo = Photo::findOrFail($id);
-
     return $photo->imageable;
 });

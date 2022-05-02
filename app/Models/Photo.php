@@ -10,7 +10,7 @@ class Photo extends Model
     use HasFactory;
 
     public function imageable(){
-        return $this->morphTo;
+        return $this->morphTo();
     }
     
 }
